@@ -32,7 +32,7 @@
 
 4. **Habit Management** (`remove`, `edit` commands)
    - Remove habits by ID or name
-   - Edit habit details (future enhancement)
+   - Edit habit details: rename, update description, set frequency, toggle active
 
 ### Technical Features
 
@@ -119,6 +119,16 @@ Commands:
 
   remove           Remove habit
     <IDENTIFIER>   Habit ID or name
+
+  edit             Edit habit details
+    <IDENTIFIER>   Habit ID or name
+    --name <NAME>  New habit name
+    --description <TEXT|null>
+                    New description or 'null' to clear
+    --frequency <N|null>
+                    New target days/week or 'null' to clear
+    --active <true|false>
+                    Toggle active status
 ```
 
 ## 🎨 User Experience
@@ -137,6 +147,15 @@ habit complete "Read 30 minutes"
 
 # View all habits including inactive
 habit list --active false
+
+# Rename a habit
+habit edit "Read 30 minutes" --name "Read books"
+
+# Update description and frequency
+habit edit "Read books" --description "Evening reading" --frequency 5
+
+# Deactivate a habit
+habit edit "Read books" --active false
 ```
 
 ### Output Format
@@ -195,6 +214,7 @@ ID: 550e8400-e29b-41d4-a716-446655440000 | Read 30 minutes
 - [ ] `habit add` creates and persists habits
 - [ ] `habit list` displays formatted habit status
 - [ ] `habit complete` prevents duplicate completions
+- [ ] `habit edit` updates name, description, frequency, active status
 - [ ] JSON persistence with automatic backup
 - [ ] Comprehensive error messages for all failure modes
 - [ ] Ownership/borrowing patterns correctly implemented
