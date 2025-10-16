@@ -31,7 +31,10 @@ impl Habit {
     }
 
     pub fn mark_complete(&mut self, date: DateTime<Utc>) -> bool {
-        let exists = self.completions.iter().any(|d| d.date_naive() == date.date_naive());
+        let exists = self
+            .completions
+            .iter()
+            .any(|d| d.date_naive() == date.date_naive());
         if exists {
             return false;
         }
@@ -44,4 +47,3 @@ impl Habit {
         &self.completions
     }
 }
-

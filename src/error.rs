@@ -15,4 +15,3 @@ pub enum HabitError {
 }
 
 pub type Result<T> = std::result::Result<T, HabitError>;
-

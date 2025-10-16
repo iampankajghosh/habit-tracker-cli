@@ -55,8 +55,7 @@ src/
 │   └── json_storage.rs # JSON file I/O with serde
 ├── cli/            # Command parsing & execution
 │   └── commands.rs # Clap structs & CommandHandler trait
-├── error.rs        # Custom error hierarchy
-└── utils.rs        # Shared utilities & advanced patterns
+└── error.rs        # Custom error hierarchy
 ```
 
 ### Data Model

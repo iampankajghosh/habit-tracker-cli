@@ -1,11 +1,11 @@
+use crate::error::Result;
 use crate::models::habit::Habit;
-use crate::error::{Result};
-use uuid::Uuid;
 use serde::{Deserialize, Serialize};
 use std::env;
 use std::fs::{self, File};
 use std::io::{BufReader, Write};
 use std::path::PathBuf;
+use uuid::Uuid;
 
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct HabitStore {
@@ -26,7 +26,9 @@ impl HabitStore {
 
     pub fn save(&self) -> Result<()> {
         let path = storage_path();
-        if let Some(parent) = path.parent() { fs::create_dir_all(parent)?; }
+        if let Some(parent) = path.parent() {
+            fs::create_dir_all(parent)?;
+        }
         let tmp = path.with_extension("json.tmp");
         let mut f = File::create(&tmp)?;
         let data = serde_json::to_vec_pretty(self)?;
@@ -41,7 +43,9 @@ impl HabitStore {
         if let Ok(id) = ident.parse::<Uuid>() {
             self.habits.iter_mut().find(|h| h.id == id)
         } else {
-            self.habits.iter_mut().find(|h| h.name.eq_ignore_ascii_case(ident))
+            self.habits
+                .iter_mut()
+                .find(|h| h.name.eq_ignore_ascii_case(ident))
         }
     }
 }
@@ -52,4 +56,3 @@ fn storage_path() -> PathBuf {
     }
     PathBuf::from("habits.json")
 }
-
